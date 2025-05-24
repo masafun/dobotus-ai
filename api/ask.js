@@ -22,8 +22,10 @@ export default async function handler(req, res) {
     });
 
     const result = await response.json();
-    console.log("OpenAI Response:", JSON.stringify(result));
-
+    
+	console.log("API Key:", process.env.OPENAI_API_KEY?.slice(0, 8)); // 安全確認
+	console.log("OpenAI Response:", JSON.stringify(result));
+	
     if (!result.choices || !result.choices[0]?.message?.content) {
       return res.status(500).json({ error: "OpenAIからの回答が取得できませんでした。" });
     }
